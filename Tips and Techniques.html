@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tips & Techniques</title>
+
+<style>
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #111 0%, #000 70%);
+  color: #eaeaea;
+}
+
+/* TOP BAR */
+.top-bar {
+  width: 100%;
+  display: flex;
+  padding: 15px;
+}
+
+.home-button {
+  text-decoration: none;
+  color: #00b7ff;
+  background: rgba(0,0,0,0.85);
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: 1px solid #00b7ff;
+  box-shadow: 0 0 10px #00b7ff;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.home-button:hover {
+  background: #002433;
+}
+
+/* HERO */
+.hero {
+  width: 100%;
+  height: 280px;
+  background: linear-gradient(120deg, #001018, #000000);
+  position: relative;
+  border-bottom: 2px solid #00b7ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-title {
+  font-size: 42px;
+  color: #00b7ff;
+  text-shadow: 0 0 12px #00b7ff;
+  font-weight: bold;
+}
+
+/* LAYOUT */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* PANELS */
+.panel {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,183,255,0.25);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 12px rgba(0,183,255,0.1);
+  transition: 0.2s ease;
+}
+
+.panel:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 18px rgba(0,183,255,0.35);
+}
+
+.panel h2 {
+  color: #00b7ff;
+  text-shadow: 0 0 8px #00b7ff;
+}
+
+.full {
+  grid-column: span 2;
+}
+
+/* TEXT */
+p {
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+/* CALLOUT BOX */
+.tip-box {
+  border-left: 4px solid #00b7ff;
+  padding: 10px 12px;
+  margin-top: 10px;
+  background: rgba(0,183,255,0.08);
+  border-radius: 6px;
+  opacity: 0.95;
+}
+
+.section-title {
+  margin-bottom: 8px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  opacity: 0.5;
+  font-size: 12px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="top-bar">
+  <a class="home-button" href="index.html">← Home</a>
+</div>
+
+<div class="hero">
+  <div class="hero-title">TIPS & TECHNIQUES</div>
+</div>
+
+<div class="container">
+
+  <!-- GENERAL STRATEGY -->
+  <div class="panel">
+    <h2>General Strategy</h2>
+    <ul>
+      <li>Stay calm under pressure — panic leads to mistakes</li>
+      <li>Learn each game’s map before serious runs</li>
+      <li>Memorise enemy behaviour and spawn patterns</li>
+      <li>Use practice runs to isolate difficult sections</li>
+    </ul>
+
+    <div class="tip-box">
+      Consistency matters more than raw speed early on.
+    </div>
+  </div>
+
+  <!-- SPEEDRUNNING -->
+  <div class="panel">
+    <h2>Speedrunning Tips</h2>
+    <ul>
+      <li>Optimise routes to reduce downtime</li>
+      <li>Use consistent keybinds and sensitivity</li>
+      <li>Watch top runners for advanced techniques</li>
+      <li>Reset early if the run is already behind pace</li>
+      <li>Record attempts to review mistakes</li>
+    </ul>
+  </div>
+
+  <!-- GAME SENSE -->
+  <div class="panel">
+    <h2>Game Sense</h2>
+    <p>
+      Good speedrunners don’t just react — they predict. Understanding AI behaviour,
+      timing windows, and resource cycles gives a major advantage.
+    </p>
+
+    <div class="tip-box">
+      In horror games like FNAF, audio cues are often more important than visuals.
+    </div>
+  </div>
+
+  <!-- ADVANCED TECHNIQUES -->
+  <div class="panel">
+    <h2>Advanced Techniques</h2>
+    <ul>
+      <li>Frame-perfect inputs (where applicable)</li>
+      <li>Momentum control and movement cancelling</li>
+      <li>Exploiting AI pathing limitations</li>
+      <li>Route skipping and sequence breaking</li>
+      <li>Safe glitch usage to avoid soft-locks</li>
+    </ul>
+  </div>
+
+  <!-- BONEWORKS -->
+  <div class="panel">
+    <h2>Boneworks Tips</h2>
+    <p>
+      Physics mastery is the foundation of Boneworks speedrunning. Momentum and object interaction
+      define every strategy.
+    </p>
+
+    <ul>
+      <li>Practice prop-flying using small objects</li>
+      <li>Use body-launching to skip sections</li>
+      <li>Chain jumps to maintain momentum</li>
+      <li>Avoid unnecessary collisions</li>
+      <li>Skip enemies whenever possible</li>
+    </ul>
+  </div>
+
+  <!-- MINECRAFT -->
+  <div class="panel">
+    <h2>Minecraft Tips</h2>
+    <p>
+      Minecraft speedrunning is heavily RNG-based. Fast resets and efficient routing are essential.
+    </p>
+
+    <ul>
+      <li>Practice sprint-jumping movement</li>
+      <li>Use hotkeys for fast crafting</li>
+      <li>Reset for good world seeds quickly</li>
+      <li>Master Nether routing and fortresses</li>
+      <li>Efficiently trade with Piglins for pearls</li>
+    </ul>
+
+    <div class="tip-box">
+      If blaze RNG is bad early, reset — saving time is more important than forcing a run.
+    </div>
+  </div>
+
+  <!-- FNAF SECURITY BREACH -->
+  <div class="panel full">
+    <h2>FNAF: Security Breach Tips</h2>
+
+    <ul>
+      <li>Use slide-boosting and bunny hopping for speed</li>
+      <li>Learn consistent wall-clip locations</li>
+      <li>Skip missions using early triggers when possible</li>
+      <li>Exploit geometry for out-of-bounds movement</li>
+      <li>Use movement over stealth whenever possible</li>
+    </ul>
+
+    <div class="tip-box">
+      Animatronics can often be outrun — hesitation is usually what gets runs killed.
+    </div>
+  </div>
+
+  <!-- GAME TIME / PHILOSOPHY -->
+  <div class="panel full">
+    <h2>Final Insight</h2>
+    <p>
+      Speedrunning success comes from repetition, patience, and understanding systems deeply.
+      Every mistake is a learning opportunity, and consistency always beats raw talent over time.
+    </p>
+  </div>
+
+</div>
+
+<footer>
+Blue Neon Strategy Guide • Improve Every Run
+</footer>
+
+</body>
+</html>

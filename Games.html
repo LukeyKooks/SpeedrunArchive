@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Game Hover Boxes</title>
+
+<style>
+
+/* =========================
+   SPEEDRUN NEON STYLE
+========================= */
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: radial-gradient(circle at top, #111 0%, #000 70%);
+  font-family: Arial, sans-serif;
+  color: #eaeaea;
+}
+
+/* TOP BAR */
+.top-bar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding: 15px;
+}
+
+.home-button {
+  text-decoration: none;
+  color: #00ff7f;
+  background: rgba(0,0,0,0.85);
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: 1px solid #00ff7f;
+  font-weight: bold;
+  box-shadow: 0 0 10px #00ff7f, 0 0 20px rgba(0,255,127,0.3);
+  transition: 0.2s ease;
+}
+
+.home-button:hover {
+  transform: scale(1.05);
+  background: rgba(0,255,127,0.1);
+}
+
+/* Container */
+.game-container {
+  display: flex;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+/* BOX */
+.game-box {
+  width: 220px;
+  height: 340px;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,255,127,0.3);
+  box-shadow: 0 0 12px rgba(0,255,127,0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+/* TITLE */
+.game-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #00ff7f;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 0 0 6px #00ff7f, 0 0 12px #00ff7f;
+  z-index: 2;
+  transition: opacity 0.2s ease;
+}
+
+/* IMAGE */
+.game-box img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.game-box:hover img { opacity: 1; }
+.game-box:hover .game-title { opacity: 0; }
+
+.game-box:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 30px #00ff7f;
+}
+
+.boneworks:hover { border-color: #ff7a18; box-shadow: 0 0 30px #ff7a18; }
+.minecraft:hover { border-color: #3cff57; box-shadow: 0 0 30px #3cff57; }
+.fnaf:hover { border-color: #ff3c7a; box-shadow: 0 0 30px #ff3c7a; }
+
+/* LOADER */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #00ff7f;
+  font-size: 22px;
+  letter-spacing: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 9999;
+}
+
+#loader.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(0,255,127,0.2);
+  border-top: 4px solid #00ff7f;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* TIMER */
+#timer {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.9);
+  color: #00ff7f;
+  border: 2px solid #00ff7f;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-family: monospace;
+  font-weight: bold;
+  z-index: 10000;
+  text-shadow: 0 0 5px #00ff7f, 0 0 10px #00ff7f, 0 0 20px #00ff7f;
+  box-shadow: 0 0 10px #00ff7f, 0 0 25px rgba(0,255,127,0.7);
+}
+
+/* FINISH BUTTON (LOWERED) */
+#finishBtn {
+  margin-top: 120px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid #00ff7f;
+  background: rgba(0,0,0,0.85);
+  color: #00ff7f;
+  box-shadow: 0 0 10px #00ff7f;
+  transition: 0.2s ease;
+}
+
+#finishBtn:hover {
+  transform: scale(1.05);
+  background: rgba(0,255,127,0.1);
+}
+
+/* FINISH SCREEN */
+#finishScreen {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 99999;
+  text-align: center;
+}
+
+#finishScreen h1 {
+  color: #00ff7f;
+  font-size: 60px;
+  text-shadow: 0 0 20px #00ff7f;
+}
+
+#leaderboard {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid #00ff7f;
+  background: rgba(0,0,0,0.7);
+  width: 300px;
+}
+
+/* CONFETTI */
+.confetti {
+  position: absolute;
+  width: 8px;
+  height: 12px;
+  top: -10px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="spinner"></div>
+  LOADING...
+</div>
+
+<!-- AUDIO (ADDED CHEER SOUND) -->
+<audio id="cheerSound" src="video/FNAF Kids Cheering - Gaming Sound Effect (HD).mp3"></audio>
+
+<!-- TIMER -->
+<div id="timer">0.00s</div>
+
+<div class="top-bar">
+  <a href="index.html" class="home-button">← Home</a>
+</div>
+
+<div class="game-container">
+
+  <div class="game-box boneworks" onclick="goTo('Boneworks.html')">
+    <img src="Pics/boneworks.jpg">
+    <div class="game-title">BONEWORKS</div>
+  </div>
+
+  <div class="game-box minecraft" onclick="goTo('Minecraft.html')">
+    <img src="Pics/minecraft.png">
+    <div class="game-title">MINECRAFT</div>
+  </div>
+
+  <div class="game-box fnaf" onclick="goTo('fnaf.html')">
+    <img src="Pics/Fnaf.png">
+    <div class="game-title">FNAF</div>
+  </div>
+
+</div>
+
+<button id="finishBtn" onclick="finishRun()">Finish Run</button>
+
+<!-- FINISH SCREEN -->
+<div id="finishScreen">
+  <h1>RUN COMPLETE!</h1>
+  <p id="finalTimeText"></p>
+  <div id="leaderboard"></div>
+</div>
+
+<script>
+
+/* loader */
+function goTo(page) {
+  document.getElementById("loader").classList.add("active");
+  setTimeout(() => window.location.href = page, 1200);
+}
+
+/* timer */
+if (!localStorage.getItem("startTime")) {
+  localStorage.setItem("startTime", Date.now());
+}
+
+let finished = false;
+
+function updateTimer() {
+  if (!finished) {
+    const start = Number(localStorage.getItem("startTime"));
+    const t = ((Date.now() - start) / 1000).toFixed(2);
+    document.getElementById("timer").innerText = t + "s";
+  }
+  requestAnimationFrame(updateTimer);
+}
+updateTimer();
+
+/* finish run */
+function finishRun() {
+  if (finished) return;
+  finished = true;
+
+  const start = Number(localStorage.getItem("startTime"));
+  const time = ((Date.now() - start) / 1000).toFixed(2);
+
+  document.getElementById("finishBtn").style.display = "none";
+  document.getElementById("timer").innerText = time + "s";
+
+  let board = JSON.parse(localStorage.getItem("leaderboard") || "[]");
+  board.push(Number(time));
+  board.sort((a,b)=>a-b);
+  board = board.slice(0,5);
+  localStorage.setItem("leaderboard", JSON.stringify(board));
+
+  document.getElementById("finishScreen").style.display = "flex";
+  document.getElementById("finalTimeText").innerText = "Your Time: " + time + "s";
+
+  let html = "<h3>🏆 Top Runs</h3>";
+  board.forEach((t,i)=>{
+    html += `<p>#${i+1} - ${t.toFixed(2)}s</p>`;
+  });
+  document.getElementById("leaderboard").innerHTML = html;
+
+  /* CHEER SOUND (ADDED) */
+  const cheer = document.getElementById("cheerSound");
+  cheer.currentTime = 0;
+  cheer.volume = 0.9;
+  cheer.play().catch(()=>{});
+
+  startConfetti();
+}
+
+/* confetti */
+function startConfetti() {
+  const colors = ["#00ff7f","#ff3c7a","#3cff57","#fff"];
+
+  for (let i = 0; i < 120; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random()*100 + "vw";
+    c.style.background = colors[Math.floor(Math.random()*colors.length)];
+    c.style.animationDuration = (Math.random()*2+2)+"s";
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),4000);
+  }
+}
+
+</script>
+
+</body>
+</html>

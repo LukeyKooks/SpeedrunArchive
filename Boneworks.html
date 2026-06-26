@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Boneworks</title>
+
+<style>
+
+/* =========================
+   NEON SPEEDRUN STYLE (ORANGE)
+========================= */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #111 0%, #000 70%);
+  color: #eaeaea;
+}
+
+/* =========================
+   PERSISTENT TIMER (NEON ORANGE FIXED)
+========================= */
+
+#timer {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.9);
+  color: #ff7a18;
+  border: 2px solid #ff7a18;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-family: monospace;
+  font-weight: bold;
+  z-index: 9999;
+
+  text-shadow:
+    0 0 5px #ff7a18,
+    0 0 10px #ff7a18,
+    0 0 20px #ff7a18;
+
+  box-shadow:
+    0 0 10px #ff7a18,
+    0 0 25px rgba(255,122,24,0.8),
+    inset 0 0 10px rgba(255,122,24,0.3);
+}
+
+/* TOP BAR */
+.top-bar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.home-button {
+  text-decoration: none;
+  color: #ff7a18;
+  background: rgba(0,0,0,0.85);
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: 1px solid #ff7a18;
+  box-shadow: 0 0 10px #ff7a18;
+  transition: 0.2s ease;
+  font-weight: bold;
+}
+
+.home-button:hover {
+  background: #3b1a00;
+  transform: scale(1.05);
+}
+
+/* HERO SECTION */
+.hero {
+  width: 100%;
+  height: 280px;
+  background: url("Pics/bwlogo.png") center/cover no-repeat;
+  position: relative;
+  border-bottom: 2px solid #ff7a18;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+.hero-title {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 40px;
+  color: #ff7a18;
+  text-shadow: 0 0 12px #ff7a18;
+  z-index: 2;
+  font-weight: bold;
+}
+
+/* MAIN LAYOUT */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* INFO BOX */
+.panel {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,122,24,0.25);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 12px rgba(255,122,24,0.15);
+}
+
+.panel h2 {
+  color: #ff7a18;
+  text-shadow: 0 0 8px #ff7a18;
+  margin-top: 0;
+}
+
+/* IMAGE GRID */
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(255,122,24,0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ff7a18;
+}
+
+/* FULL WIDTH SECTION */
+.full {
+  grid-column: span 2;
+}
+
+/* TEXT */
+p {
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+/* WR HEADER */
+.speedrun-header {
+  max-width: 1100px;
+  margin: 20px auto 0 auto;
+  padding: 15px 20px;
+  border: 1px solid rgba(255,122,24,0.4);
+  border-radius: 10px;
+  background: rgba(0,0,0,0.6);
+  box-shadow: 0 0 12px rgba(255,122,24,0.2);
+}
+
+.speedrun-header h1 {
+  margin: 0;
+  color: #ff7a18;
+  text-shadow: 0 0 10px #ff7a18;
+}
+
+.speedrun-header p {
+  margin: 5px 0 0 0;
+  opacity: 0.9;
+}
+
+/* LIGHTBOX */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 100000;
+  cursor: pointer;
+  text-align: center;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(255,122,24,0.5);
+}
+
+#lightbox-text {
+  margin-top: 15px;
+  color: #ffb37a;
+  font-size: 16px;
+  max-width: 800px;
+  line-height: 1.5;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="bg-music" autoplay loop>
+  <source src="Video/nickpanekaiassets-356-8-bit-chiptune-game-music-357518.mp3" type="audio/mpeg">
+</audio>
+
+<!-- TIMER -->
+<div id="timer">0.00s</div>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <a class="home-button" href="Games.html">← Games</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-title">BONEWORKS</div>
+</div>
+
+<!-- WR INFO HEADER -->
+<div class="speedrun-header">
+  <h1>6m 57s</h1>
+  <p>WR Time (placed by Runner Emil) • Boneworks NewGame+</p>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+
+  <div class="panel">
+    <h2>About the Game</h2>
+    <p>
+      Boneworks is a VR physics-driven action game. It features a realistic interaction system and experimental combat.
+      The game operates on a unified physics engine, allowing players to manipulate objects, movement, and momentum.
+      This leads to highly creative speedrunning strategies.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h2>Key Speedrunning Features</h2>
+    <ul>
+      <li>Physics-based movement exploits</li>
+      <li>Prop-flying and object boosting</li>
+      <li>Momentum stacking</li>
+      <li>Out-of-bounds skips</li>
+      <li>Flexible routing via physics freedom</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h2>Gameplay Style (Speedrunning)</h2>
+    <p>
+      Boneworks speedrunning focuses on mastering the physics engine.
+      Runners use objects to launch themselves across maps, chain momentum to skip sections,
+      and exploit collision quirks to pass through geometry.
+      The game rewards creativity since almost any object can serve as a movement tool.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h2>Difficulty</h2>
+    <p>
+      Very high skill ceiling. Speedrunning Boneworks requires precise control over physics,
+      quick decision-making, and a deep understanding of object interactions.
+      Small mistakes can derail momentum and cost significant time.
+    </p>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="panel full">
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <img src="Pics/emil sub 7.jpg" alt="Sub 7 WR thumbnail showing Boneworks speedrun achievement">
+      <img src="Pics/Valve fly.jpg" alt="Player using valve prop to gain flight momentum">
+      <img src="Pics/Gun_glitch.png" alt="Weapon glitch causing unintended aerial movement">
+      <img src="Pics/Screenshot 2026-06-26 223110.png" alt="Player grabbing crown from king using physics exploit">
+    </div>
+  </div>
+
+</div>
+
+<footer></footer>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <img id="lightbox-img" src="">
+  <div id="lightbox-text"></div>
+</div>
+
+<script>
+
+/* MUSIC */
+document.addEventListener("click", () => {
+  const music = document.getElementById("bg-music");
+  if (music) music.play().catch(() => {});
+}, { once: true });
+
+/* TIMER */
+if (!localStorage.getItem("startTime")) {
+  localStorage.setItem("startTime", Date.now());
+}
+
+function updateTimer() {
+  const startTime = localStorage.getItem("startTime");
+  const seconds = ((Date.now() - Number(startTime)) / 1000).toFixed(2);
+  document.getElementById("timer").innerText = seconds + "s";
+  requestAnimationFrame(updateTimer);
+}
+updateTimer();
+
+/* LIGHTBOX */
+const lightbox = document.getElementById("lightbox");
+const imgEl = document.getElementById("lightbox-img");
+const textEl = document.getElementById("lightbox-text");
+
+const descriptions = {
+  "emil sub 7.jpg":
+    "World record thumbnail marking a sub-7 minute Boneworks completion. A near-perfect run showcasing extreme optimisation and execution.",
+
+  "Valve fly.jpg":
+    "A physics exploit where a valve is used to generate launch momentum, turning a simple object into a movement tool.",
+
+  "Gun_glitch.png":
+    "A weapon glitch that creates unintended aerial lift and movement control.",
+
+  "Screenshot 2026-06-26 223110.png":
+    "A physics exploit allowing early crown interaction by bypassing intended game logic."
+};
+
+document.querySelectorAll(".gallery img").forEach(img => {
+  img.addEventListener("click", () => {
+    lightbox.style.display = "flex";
+    imgEl.src = img.src;
+
+    const file = img.src.split("/").pop();
+    textEl.innerText = descriptions[file] || img.alt;
+  });
+});
+
+lightbox.addEventListener("click", () => {
+  lightbox.style.display = "none";
+  imgEl.src = "";
+  textEl.innerText = "";
+});
+
+</script>
+
+</body>
+</html>

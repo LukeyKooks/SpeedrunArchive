@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Minecraft</title>
+
+<style>
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #111 0%, #000 70%);
+  color: #eaeaea;
+}
+
+/* =========================
+   NEON TIMER (FIXED + GLOW)
+========================= */
+
+#timer {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.9);
+  color: #3cff57;
+  border: 2px solid #3cff57;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-family: monospace;
+  font-weight: bold;
+  z-index: 9999;
+
+  text-shadow:
+    0 0 5px #3cff57,
+    0 0 10px #3cff57,
+    0 0 20px #3cff57;
+
+  box-shadow:
+    0 0 10px #3cff57,
+    0 0 25px rgba(60,255,87,0.7),
+    inset 0 0 10px rgba(60,255,87,0.25);
+}
+
+/* TOP BAR */
+.top-bar {
+  width: 100%;
+  display: flex;
+  padding: 15px;
+}
+
+.home-button {
+  text-decoration: none;
+  color: #00ff7f;
+  background: rgba(0,0,0,0.85);
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: 1px solid #00ff7f;
+  box-shadow: 0 0 10px #00ff7f;
+  font-weight: bold;
+}
+
+.home-button:hover {
+  background: #003b1f;
+}
+
+/* HERO */
+.hero {
+  width: 100%;
+  height: 280px;
+  background: url("Pics/minecraft.png") center/cover no-repeat;
+  position: relative;
+  border-bottom: 2px solid #3cff57;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+.hero-title {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 40px;
+  color: #3cff57;
+  text-shadow: 0 0 12px #3cff57;
+  font-weight: bold;
+  z-index: 2;
+}
+
+/* WR HEADER */
+.speedrun-header {
+  max-width: 1100px;
+  margin: 20px auto 0 auto;
+  padding: 15px 20px;
+  border: 1px solid rgba(60,255,87,0.4);
+  border-radius: 10px;
+  background: rgba(0,0,0,0.6);
+  box-shadow: 0 0 12px rgba(60,255,87,0.2);
+}
+
+.speedrun-header h1 {
+  margin: 0;
+  color: #3cff57;
+  text-shadow: 0 0 10px #3cff57;
+}
+
+.speedrun-header p {
+  margin: 5px 0 0 0;
+  opacity: 0.9;
+}
+
+/* LAYOUT */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.panel {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(60,255,87,0.25);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 12px rgba(60,255,87,0.1);
+}
+
+.panel h2 {
+  color: #3cff57;
+  text-shadow: 0 0 8px #3cff57;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(60,255,87,0.3);
+  transition: 0.2s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #3cff57;
+}
+
+.full {
+  grid-column: span 2;
+}
+
+p {
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND MUSIC -->
+<audio id="bg-music" autoplay loop>
+  <source src="Video/the_creative-retro-groove-352168.mp3" type="audio/mpeg">
+</audio>
+
+<!-- TIMER -->
+<div id="timer">0.00s</div>
+
+<div class="top-bar">
+  <a class="home-button" href="Games.html">← Games</a>
+</div>
+
+<div class="hero">
+  <div class="hero-title">MINECRAFT</div>
+</div>
+
+<!-- SPEEDRUN HEADER -->
+<div class="speedrun-header">
+  <h1>3m 51s 965ms, 6m 50s 359ms</h1>
+  <p>1. WR Time (placed by Runner nsla) • Minecraft: Java Edition (Any%, random seed, external, 1.9+)<br>
+
+	2. WR Time (placed by Runner lowkey) • Minecraft: Java Edition (Any% Glitchless, random seed, 1.16-1.19)</p>
+</div>
+
+<div class="container">
+
+  <div class="panel">
+    <h2>About the Game</h2>
+    <p>
+      Minecraft is an open-world sandbox game. Players gather resources, craft tools, and try to defeat the Ender Dragon.
+      Its procedural generation and random elements make it one of the most popular and competitive speedrunning games.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h2>Key Speedrunning Features</h2>
+    <ul>
+      <li>Random seed vs set seed categories</li>
+      <li>RNG-dependent resource collection</li>
+      <li>Nether routing</li>
+      <li>Stronghold location optimization</li>
+      <li>Blaze rod and ender pearl RNG</li>
+      <li>Fast crafting and inventory management</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h2>Gameplay Style (Speedrunning)</h2>
+    <p>
+      Minecraft speedrunning aims to optimize RNG while performing fast mechanics.
+      Runners reset worlds frequently to find favorable seeds, then rush the Nether,
+      locate a fortress, collect blaze rods, trade for ender pearls, and find the stronghold.
+      Movement, crafting speed, and routing knowledge are essential.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h2>Difficulty</h2>
+    <p>
+      Moderate to very high. RNG plays a major role, and runners often reset hundreds of worlds
+      before finding a viable seed. Mechanical skill and consistency are critical.
+    </p>
+  </div>
+
+  <div class="panel full">
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <img src="Pics/mcwr.jpg">
+      <img src="Pics/dream-finally-admits-to-cheating-in-minecraft-speedrun-1.jpg.jpg">
+      <img src="Pics/minecraft-speedrun-guide-5.webp">
+      <img src="Pics/Minecraft-speedrunning-Player-making-a-Nether-portal-in-the-speedrunning-way-in-Minecraft.webp">
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+document.addEventListener("click", () => {
+  const music = document.getElementById("bg-music");
+  if (music) {
+    music.play().catch(() => {});
+  }
+}, { once: true });
+
+if (!localStorage.getItem("startTime")) {
+  localStorage.setItem("startTime", Date.now());
+}
+
+function updateTimer() {
+  const startTime = localStorage.getItem("startTime");
+  const finished = localStorage.getItem("finished");
+
+  if (startTime && finished !== "true") {
+    const seconds = ((Date.now() - Number(startTime)) / 1000).toFixed(2);
+    document.getElementById("timer").innerText = seconds + "s";
+  } else {
+    document.getElementById("timer").innerText = "0.00s";
+  }
+
+  requestAnimationFrame(updateTimer);
+}
+
+updateTimer();
+
+</script>
+
+</body>
+</html>

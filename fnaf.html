@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FNAF</title>
+
+<style>
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #111 0%, #000 70%);
+  color: #eaeaea;
+}
+
+/* TOP BAR */
+.top-bar {
+  width: 100%;
+  display: flex;
+  padding: 15px;
+}
+
+.home-button {
+  text-decoration: none;
+  color: #ff3c7a;
+  background: rgba(0,0,0,0.85);
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: 1px solid #ff3c7a;
+  box-shadow: 0 0 10px #ff3c7a;
+  font-weight: bold;
+}
+
+.home-button:hover {
+  background: #2b0012;
+}
+
+/* HERO */
+.hero {
+  width: 100%;
+  height: 280px;
+  background: url("Pics/Fnaf.png") center/cover no-repeat;
+  position: relative;
+  border-bottom: 2px solid #ff3c7a;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+}
+
+.hero-title {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 40px;
+  color: #ff3c7a;
+  text-shadow: 0 0 12px #ff3c7a;
+  font-weight: bold;
+}
+
+/* WR HEADER */
+.speedrun-header {
+  max-width: 1100px;
+  margin: 20px auto 0 auto;
+  padding: 15px 20px;
+  border: 1px solid rgba(255,60,122,0.4);
+  border-radius: 10px;
+  background: rgba(0,0,0,0.6);
+  box-shadow: 0 0 12px rgba(255,60,122,0.2);
+}
+
+.speedrun-header h1 {
+  margin: 0;
+  color: #ff3c7a;
+  text-shadow: 0 0 10px #ff3c7a;
+}
+
+.speedrun-header p {
+  margin: 5px 0 0 0;
+  opacity: 0.9;
+}
+
+/* LAYOUT */
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.panel {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,60,122,0.25);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 12px rgba(255,60,122,0.1);
+}
+
+.panel h2 {
+  color: #ff3c7a;
+  text-shadow: 0 0 8px #ff3c7a;
+}
+
+p {
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+/* FULL WIDTH */
+.full {
+  grid-column: span 2;
+}
+
+/* GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgba(255,60,122,0.3);
+  transition: 0.2s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #ff3c7a;
+}
+
+/* TIMER */
+#timer {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.9);
+  color: #ff3c7a;
+  border: 2px solid #ff3c7a;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-family: monospace;
+  font-weight: bold;
+  text-shadow:
+    0 0 5px #ff3c7a,
+    0 0 10px #ff3c7a,
+    0 0 20px #ff3c7a;
+  box-shadow:
+    0 0 10px #ff3c7a,
+    0 0 25px rgba(255,60,122,0.8),
+    inset 0 0 10px rgba(255,60,122,0.3);
+  z-index: 99999;
+}
+
+/* JUMPSCARE */
+#jumpscare {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+#jumpscare video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* COLLAPSIBLES */
+details {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,60,122,0.25);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 10px rgba(255,60,122,0.1);
+}
+
+summary {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff3c7a;
+  text-shadow: 0 0 8px #ff3c7a;
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details p {
+  margin-top: 10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="bgMusic" autoplay loop>
+  <source src="Video/freesound_community-scary-ambience-59002.mp3">
+</audio>
+
+<!-- TIMER -->
+<div id="timer">0.00s</div>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <a class="home-button" href="Games.html">← Games</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-title">FIVE NIGHTS AT FREDDY'S (SECURITY BREACH)</div>
+</div>
+
+<!-- HEADER -->
+<div class="speedrun-header">
+  <h1>893.12s</h1>
+  <p>Example WR Time Placeholder • Security Breach Any% Speedrun Reference</p>
+</div>
+
+<div class="container">
+
+  <div class="panel">
+    <h2>About the Game</h2>
+    <p>
+      Five Nights at Freddy’s: Security Breach is a first-person survival game set in a massive neon-lit mall.
+      Players control Gregory as he tries to escape while avoiding animatronics.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h2>Key Speedrunning Features</h2>
+    <ul>
+      <li>Out-of-bounds glitches</li>
+      <li>Wall clipping exploits</li>
+      <li>Movement tech</li>
+      <li>Early trigger manipulation</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h2>Gameplay Style (Speedrunning)</h2>
+    <p>
+      Players break geometry, skip missions, and use movement exploits to finish quickly.
+    </p>
+  </div>
+
+  <div class="panel">
+    <h2>Difficulty</h2>
+    <p>
+      High but manageable with practice and route knowledge.
+    </p>
+  </div>
+
+  <div class="panel full">
+    <h2>Speedrun Ending Categories</h2>
+    <p>Click each ending to expand details.</p>
+  </div>
+
+  <div class="full">
+
+    <details>
+      <summary>Vanny Ending</summary>
+      <p><b>Runner:</b> MichaelCheddar</p>
+      <p><b>IGT:</b> 2m 04s 383ms</p>
+      <p>
+        Fast skip-heavy route using aggressive glitches and early mission skips.
+      </p>
+    </details>
+
+    <details>
+      <summary>Escape Ending</summary>
+      <p><b>Runner:</b> bluuur</p>
+      <p><b>IGT:</b> 6m 30s 567ms</p>
+      <p>
+        Stable routing focused on consistent movement and exit optimization.
+      </p>
+    </details>
+
+    <details>
+      <summary>Afton Ending</summary>
+      <p><b>Runner:</b> Piturrete</p>
+      <p><b>IGT:</b> 8m 44s 117ms</p>
+      <p>
+        Heavy clipping and underground traversal through Burntrap section.
+      </p>
+    </details>
+
+    <details>
+      <summary>Princess Quest Ending</summary>
+      <p><b>Runner:</b> zachhnl</p>
+      <p><b>IGT:</b> 11m 48s 383ms</p>
+      <p>
+        Puzzle-based glitch route with arcade skip optimisation.
+      </p>
+    </details>
+
+  </div>
+
+</div>
+
+<!-- JUMPSCARE -->
+<div id="jumpscare">
+  <video id="jumpscareVideo" src="Video/jumpscare.mp4"></video>
+</div>
+
+<script>
+
+/* TIMER */
+if (!localStorage.getItem("startTime")) {
+  localStorage.setItem("startTime", Date.now());
+}
+
+function updateTimer() {
+  const startTime = Number(localStorage.getItem("startTime"));
+  const seconds = ((Date.now() - startTime) / 1000).toFixed(2);
+  document.getElementById("timer").innerText = seconds + "s";
+  requestAnimationFrame(updateTimer);
+}
+updateTimer();
+
+/* MUSIC FIX */
+const bgMusic = document.getElementById("bgMusic");
+bgMusic.volume = 0.4;
+
+/* JUMPSCARE SYSTEM */
+const jumpscare = document.getElementById("jumpscare");
+const video = document.getElementById("jumpscareVideo");
+
+let cooldown = false;
+
+function triggerJumpscare() {
+  if (cooldown) return;
+  cooldown = true;
+
+  jumpscare.style.display = "flex";
+  video.currentTime = 0;
+  video.play().catch(() => {});
+
+  setTimeout(() => {
+    jumpscare.style.display = "none";
+    video.pause();
+    cooldown = false;
+  }, 2500);
+}
+
+function randomCheck() {
+  const roll = Math.random() * 2000;
+  if (roll < 1) triggerJumpscare();
+}
+
+document.addEventListener("mousemove", randomCheck);
+document.addEventListener("scroll", randomCheck);
+setInterval(randomCheck, 4000);
+
+</script>
+
+</body>
+</html>

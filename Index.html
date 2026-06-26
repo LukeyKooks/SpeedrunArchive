@@ -1,0 +1,335 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Speedrunning Hub</title>
+
+<style>
+
+/* =========================
+   SPEEDRUN NEON HUB STYLE
+========================= */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #111 0%, #000 70%);
+  color: #eaeaea;
+  overflow-x: hidden;
+}
+
+h1, h2 {
+  color: #00ff7f;
+  text-shadow: 0 0 10px #00ff7f;
+}
+
+/* HEADER */
+#Header {
+  background: rgba(10, 10, 10, 0.95);
+  border-bottom: 2px solid #00ff7f;
+  padding: 20px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+/* MAIN */
+#Main {
+  max-width: 900px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+/* SECTIONS */
+.Item-Section {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,255,127,0.2);
+  padding: 18px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,255,127,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.Item-Section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0,255,127,0.25);
+}
+
+/* TIMER */
+#timer {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.9);
+  color: #00ff7f;
+  border: 2px solid #00ff7f;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 20px;
+  z-index: 9999;
+  font-family: monospace;
+  font-weight: bold;
+
+  text-shadow:
+    0 0 5px #00ff7f,
+    0 0 10px #00ff7f,
+    0 0 20px #00ff7f;
+
+  box-shadow:
+    0 0 10px #00ff7f,
+    0 0 25px rgba(0,255,127,0.7),
+    inset 0 0 10px rgba(0,255,127,0.25);
+}
+
+/* TIPS BUTTON */
+#tipsBtn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: rgba(0,0,0,0.85);
+  color: #00aaff;
+  border: 1px solid #00aaff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 16px;
+  text-decoration: none;
+  z-index: 9999;
+  box-shadow: 0 0 12px rgba(0,170,255,0.8);
+  transition: 0.2s;
+}
+
+#tipsBtn:hover {
+  background: #001a2a;
+  box-shadow: 0 0 18px rgba(0,170,255,1);
+}
+
+/* NEXT BUTTON */
+#nextBtn {
+  display: block;
+  margin: 80px auto 40px auto;
+  background: rgba(0,0,0,0.85);
+  color: #00ff7f;
+  border: 1px solid #00ff7f;
+  padding: 12px 18px;
+  border-radius: 6px;
+  font-family: monospace;
+  cursor: pointer;
+  box-shadow: 0 0 10px #00ff7f;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+#nextBtn:hover {
+  background: #003b1f;
+  transform: scale(1.05);
+}
+
+/* PLAYER */
+#player {
+  position: fixed;
+  right: 30px;
+  top: 120px;
+  font-size: 45px;
+  z-index: 9999;
+  transition: transform 0.05s linear;
+}
+
+/* START SCREEN */
+#startScreen {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.78);
+  backdrop-filter: blur(7px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  color: #00ff7f;
+  z-index: 10000;
+  cursor: pointer;
+  text-shadow: 0 0 10px #00ff7f;
+}
+
+/* SPACING FOR SCROLL */
+.spacer {
+  height: 140px;
+}
+
+/* SMALL HIGHLIGHT BOX */
+.highlight {
+  border-left: 4px solid #00ff7f;
+  padding: 10px 12px;
+  margin-top: 10px;
+  background: rgba(0,255,127,0.06);
+  border-radius: 6px;
+}
+
+</style>
+</head>
+
+<body>
+
+<a id="tipsBtn" href="Tips and Techniques.html">Tips & Techniques</a>
+
+<!-- START SCREEN -->
+<div id="startScreen">Click to Start Speedrun Experience</div>
+
+<!-- TIMER -->
+<div id="timer">0.00s</div>
+
+<!-- PLAYER -->
+<div id="player">🏃</div>
+
+<!-- MUSIC -->
+<audio loop id="bg-music">
+  <source src="Video/backgroundmusicmaster-adrenaline-rush-378817.mp3" type="audio/mpeg">
+</audio>
+
+<div id="Header">
+  <h1>SPEEDRUNNING HUB</h1>
+</div>
+
+<div id="Main">
+
+  <div class="Item-Section">
+    <h2>Introduction</h2>
+    <p>
+      Speedrunning is the art of completing a video game as fast as possible.
+      It blends precision, strategy, and deep game knowledge. What began as a niche hobby
+      has become a global competitive movement.
+    </p>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="Item-Section">
+    <h2>Early Origins</h2>
+    <p>
+      In the 1990s, games like DOOM and Quake introduced early speedrunning culture through
+      recorded demos, leaderboards, and community competition.
+    </p>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="Item-Section">
+    <h2>Modern Era</h2>
+    <p>
+      Today, speedrunning is a global ecosystem with livestreams, leaderboards, and major charity events
+      like Games Done Quick raising millions worldwide.
+    </p>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="Item-Section">
+    <h2>Core Techniques</h2>
+    <ul>
+      <li>Sequence breaking</li>
+      <li>Glitch exploitation</li>
+      <li>Frame-perfect inputs</li>
+      <li>Route optimisation</li>
+      <li>Advanced movement mechanics</li>
+    </ul>
+
+    <div class="highlight">
+      Every game has its own “fastest logic” — speedrunners break that logic.
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="Item-Section">
+    <h2>Featured Games</h2>
+    <p>
+      This site explores three major speedrunning communities:
+    </p>
+    <ul>
+      <li><b>Boneworks</b> — physics-based movement and object manipulation</li>
+      <li><b>Minecraft</b> — RNG routing, crafting, and Nether optimisation</li>
+      <li><b>FNAF Security Breach</b> — glitch exploitation and out-of-bounds movement</li>
+    </ul>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="Item-Section">
+    <h2>Psychology of Speedrunning</h2>
+    <p>
+      Speedrunning is both mechanical and mental. Runners perform hundreds of attempts,
+      learning patience, consistency, and resilience through repetition and failure.
+    </p>
+
+    <div class="highlight">
+      Every failed run is part of the path to perfection.
+    </div>
+  </div>
+
+  <button id="nextBtn">Next Page → Games</button>
+
+</div>
+
+<script>
+
+/* RESET */
+localStorage.removeItem("startTime");
+localStorage.removeItem("finished");
+
+/* ELEMENTS */
+const startScreen = document.getElementById("startScreen");
+const timer = document.getElementById("timer");
+const nextBtn = document.getElementById("nextBtn");
+const audio = document.getElementById("bg-music");
+const player = document.getElementById("player");
+
+/* START */
+startScreen.addEventListener("click", () => {
+  startScreen.style.display = "none";
+
+  localStorage.setItem("startTime", Date.now());
+  localStorage.setItem("finished", "false");
+
+  audio.play().catch(() => {});
+});
+
+/* TIMER */
+function updateTimer() {
+  const startTime = localStorage.getItem("startTime");
+  const finished = localStorage.getItem("finished");
+
+  if (startTime && finished !== "true") {
+    const seconds = ((Date.now() - startTime) / 1000).toFixed(2);
+    timer.innerText = seconds + "s";
+  } else {
+    timer.innerText = "0.00s";
+  }
+
+  requestAnimationFrame(updateTimer);
+}
+
+updateTimer();
+
+/* SCROLL PLAYER */
+window.addEventListener("scroll", () => {
+  const startTime = localStorage.getItem("startTime");
+  if (!startTime) return;
+
+  const scrollTop = window.scrollY;
+  const maxScroll = document.body.scrollHeight - window.innerHeight;
+
+  const progress = scrollTop / maxScroll;
+  const maxY = window.innerHeight - 150;
+
+  player.style.transform = `translateY(${progress * maxY}px)`;
+});
+
+/* NEXT */
+nextBtn.addEventListener("click", () => {
+  window.location.href = "Games.html";
+});
+
+</script>
+
+</body>
+</html>
